@@ -34,4 +34,15 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           source: "."
-          target: "~/bookapi"
+          target: "~/pocket_pixel"
+      - name: Restart application
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          script: |
+            cd ~/bookapi
+            npm install
+            pm2 restart bookapi || pm2 start npm --name bookapi -- start
+            pm2 save
