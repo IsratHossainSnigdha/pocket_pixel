@@ -44,5 +44,5 @@ jobs:
           script: |
             cd ~/bookapi
             npm install
-            pm2 restart bookapi || pm2 start npm --name bookapi -- start
+            pm2 restart pocket_pixel || pm2 start npm --name pocket_pixel -- start
             pm2 save
