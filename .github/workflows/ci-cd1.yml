@@ -26,3 +26,12 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Copy files to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          source: "."
+          target: "~/bookapi"
